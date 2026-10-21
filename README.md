@@ -46,22 +46,20 @@ também passa pela auditoria completa da simulação antes de receber o nome fin
 
 ## Arquivos principais
 
-+-----------------------------------------------------------------------+
-| Caminho               | Conteúdo                                      |
-|-----------------------+-----------------------------------------------|
-| modelo.sql            | DDL original                                  |
-| gerar_projeto.py      | Dimensões, parâmetros e abertura              |
-| simular_operacao.py   | Operação cronológica e auditoria              |
-| preparar_analytics.py | Views, dez consultas, validação e exportação  |
-| construir_powerbi.py  | Modelo e páginas editáveis                    |
-| configurar_powerbi.py | Ajusta o caminho dos CSV ao local de extração |
-| executar_pipeline.py  | Coordena as etapas automáticas                |
-| sql/                  | Views e consultas analíticas                  |
-| dados/                | Banco e relatório de validação                |
-| powerbi/              | PBIP, modelo, relatório, dados e medidas      |
-| docs/                 | Cenário, regras, dicionário e guia Power BI   |
-| resultados/           | Evidências dos testes e resumo visual         |
-+-----------------------------------------------------------------------+
+| Caminho | Conteúdo |
+|---|---|
+| `modelo.sql` | DDL do banco de dados |
+| `gerar_projeto.py` | Dimensões, parâmetros e abertura |
+| `simular_operacao.py` | Operação cronológica e auditoria |
+| `preparar_analytics.py` | Views, dez consultas, validação e exportação |
+| `construir_powerbi.py` | Geração do modelo e das páginas editáveis |
+| `configurar_powerbi.py` | Configuração do caminho dos CSVs |
+| `executar_pipeline.py` | Coordenação das etapas automáticas |
+| `sql/` | Views e consultas analíticas |
+| `dados/` | Bancos SQLite e relatórios de validação |
+| `powerbi/` | Projeto PBIP, modelo semântico, relatório, dados e medidas |
+| `docs/` | Cenário, regras, dicionário, guias, resultados e imagens |
+| `resultados/` | Evidências de validação e resumo visual |
 
 ## Resultado apurado em 31/12/2025
 - Estoque: R$ 2.951.164,50, com 34.875 unidades.
@@ -94,18 +92,16 @@ e 12 fornecedores.
 Posição de estoque e avaliação de fornecedores em **31/12/2025**,
 considerando todos os centros e categorias.
 
-+-----------------------------------------------------------------+
-| Indicador                                     | Resultado       |
-|-----------------------------------------------+-----------------|
-| Valor do estoque                              | R$ 2.951.164,50 |
-| Saldo físico                                  | 34.875 unidades |
-| Compras pendentes                             | 25.637 unidades |
-| Combinações de produto e centro em risco      | 90              |
-| Combinações sem saldo e com demanda observada | 18              |
-| Combinações com estoque sem saída em 90 dias  | 6               |
-| Pontualidade dos itens de compra              | 27,26%          |
-| Itens pendentes atrasados                     | 26              |
-+-----------------------------------------------------------------+
+| Indicador | Resultado |
+|---|---:|
+| Valor do estoque | R$ 2.951.164,50 |
+| Saldo físico | 34.875 unidades |
+| Compras pendentes | 25.637 unidades |
+| Combinações de produto e centro em risco | 90 |
+| Combinações sem saldo e com demanda observada | 18 |
+| Combinações com estoque sem saída em 90 dias | 6 |
+| Pontualidade dos itens de compra | 27,26% |
+| Itens pendentes atrasados | 26 |
 
 ### Achados e recomendações
 
