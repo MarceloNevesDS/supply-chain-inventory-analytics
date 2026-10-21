@@ -1,0 +1,5 @@
+expression pPastaDados = "D:/Portifólio BI/2 - Supply Chain & Inventory Analytics/powerbi/dados" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 50defb5b-ebbc-4edf-9c91-97a2300bd6ba
+
+	annotation PBI_ResultType = Text
+

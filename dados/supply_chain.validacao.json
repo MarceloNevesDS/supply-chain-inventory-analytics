@@ -1,0 +1,18 @@
+{
+  "etapa": "Carga inicial e abertura; simulação de compras e dias seguintes ainda não implementada",
+  "semente": 404,
+  "integridade": "ok",
+  "divergencias_abertura": 0,
+  "contagens": {
+    "aux_produto_centro": 300,
+    "dim_centro_distribuicao": 3,
+    "dim_data": 791,
+    "dim_fornecedor": 12,
+    "dim_produto": 100,
+    "dim_tipo_movimento": 5,
+    "fato_estoque_diario": 300,
+    "fato_item_compra": 0,
+    "fato_movimento_estoque": 156,
+    "fato_recebimento": 0
+  }
+}

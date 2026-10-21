@@ -1,0 +1,36 @@
+{
+  "semente": 404,
+  "periodo": [
+    "2024-01-01",
+    "2025-12-31"
+  ],
+  "contagens": {
+    "aux_produto_centro": 330,
+    "dim_centro_distribuicao": 3,
+    "dim_data": 791,
+    "dim_fornecedor": 12,
+    "dim_produto": 100,
+    "dim_tipo_movimento": 5,
+    "fato_estoque_diario": 219300,
+    "fato_item_compra": 6821,
+    "fato_movimento_estoque": 203550,
+    "fato_recebimento": 9013
+  },
+  "validacoes": {
+    "valor_item_compra": 0,
+    "valor_recebimento": 0,
+    "origem_recebimento": 0,
+    "excesso_recebido": 0,
+    "cabecalho_pedido": 0,
+    "espelho_recebimento": 0,
+    "sinal_origem_motivo": 0,
+    "data_movimento": 0,
+    "data_recebimento": 0,
+    "sobreposicao_vigencia": 0,
+    "parametros_diarios": 0,
+    "pendencia_diaria": 0,
+    "abertura": 0,
+    "replay_saldo_custo_valor": 0,
+    "integridade": "ok"
+  }
+}

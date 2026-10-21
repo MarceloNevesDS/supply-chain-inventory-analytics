@@ -1,0 +1,24 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_centro_distribuicao","dim_data","dim_fornecedor","dim_produto","dim_tipo_movimento","fato_estoque_diario","fato_item_compra","fato_movimento_estoque","fato_recebimento","pPastaDados"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_centro_distribuicao
+ref table dim_data
+ref table dim_fornecedor
+ref table dim_produto
+ref table dim_tipo_movimento
+ref table fato_estoque_diario
+ref table fato_item_compra
+ref table fato_movimento_estoque
+ref table fato_recebimento
+

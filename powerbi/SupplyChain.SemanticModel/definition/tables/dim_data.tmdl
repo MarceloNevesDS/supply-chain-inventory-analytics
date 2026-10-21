@@ -1,0 +1,155 @@
+table dim_data
+	lineageTag: 270f288c-b9bf-49cf-8b10-30ac7afe6b44
+	dataCategory: Time
+
+	column id_data
+		dataType: int64
+		isHidden
+		lineageTag: 87be5744-380c-437d-bdc4-872d375153fd
+		summarizeBy: none
+		sourceColumn: id_data
+
+	column dt_data
+		dataType: dateTime
+		isKey
+		formatString: dd/MM/yyyy
+		lineageTag: 72a03ca6-a79b-459f-b445-5c582857bf40
+		summarizeBy: none
+		sourceColumn: dt_data
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column nr_dia_mes
+		dataType: int64
+		lineageTag: 0d401873-3fdb-4d82-9c21-6985362cec66
+		summarizeBy: none
+		sourceColumn: nr_dia_mes
+
+	column nr_dia_semana
+		dataType: int64
+		lineageTag: e773731c-b20e-453a-9138-50083014f574
+		summarizeBy: none
+		sourceColumn: nr_dia_semana
+
+	column nm_dia_semana
+		dataType: string
+		lineageTag: 844c5a70-b512-4259-9a2c-3e876b968dc5
+		summarizeBy: none
+		sourceColumn: nm_dia_semana
+		sortByColumn: nr_dia_semana
+
+	column nr_mes
+		dataType: int64
+		lineageTag: 2192c0ce-cf33-47cc-9d65-652b64f69e69
+		summarizeBy: none
+		sourceColumn: nr_mes
+
+	column nm_mes
+		dataType: string
+		lineageTag: 71bb95b7-a8cc-4cd3-8419-d319126da869
+		summarizeBy: none
+		sourceColumn: nm_mes
+		sortByColumn: nr_mes
+
+	column nr_bimestre
+		dataType: int64
+		lineageTag: 1a880040-81ec-414a-be18-ab54cf8fcfe3
+		summarizeBy: none
+		sourceColumn: nr_bimestre
+
+	column nm_bimestre
+		dataType: string
+		lineageTag: 72127f2c-7fe0-47c9-b1c2-f3f7ddbfffa5
+		summarizeBy: none
+		sourceColumn: nm_bimestre
+		sortByColumn: nr_bimestre
+
+	column nr_trimestre
+		dataType: int64
+		lineageTag: a58100c5-544f-4464-b013-574894bbd55f
+		summarizeBy: none
+		sourceColumn: nr_trimestre
+
+	column nm_trimestre
+		dataType: string
+		lineageTag: 3e806704-ae3c-46f4-b990-3978ec0a2874
+		summarizeBy: none
+		sourceColumn: nm_trimestre
+		sortByColumn: nr_trimestre
+
+	column nr_semestre
+		dataType: int64
+		lineageTag: 4744d671-6839-4da6-b60e-9dc1980c047a
+		summarizeBy: none
+		sourceColumn: nr_semestre
+
+	column nm_semestre
+		dataType: string
+		lineageTag: 59324ce2-d025-4a9c-b7b8-87adbf427c75
+		summarizeBy: none
+		sourceColumn: nm_semestre
+		sortByColumn: nr_semestre
+
+	column nr_ano
+		dataType: int64
+		lineageTag: 37b0c7d6-5073-48f4-9624-e68f8a3ff02d
+		summarizeBy: none
+		sourceColumn: nr_ano
+
+	column nr_ano_mes
+		dataType: int64
+		lineageTag: 960d30cc-7a3a-4a8c-a448-d2e45e03026d
+		summarizeBy: none
+		sourceColumn: nr_ano_mes
+
+	column in_fim_semana
+		dataType: int64
+		lineageTag: d8521a05-d1b2-4101-8851-35ba01debfb4
+		summarizeBy: none
+		sourceColumn: in_fim_semana
+
+	column in_feriado_nacional
+		dataType: int64
+		lineageTag: de964c97-ee45-40a8-b504-30e3baaa211c
+		summarizeBy: none
+		sourceColumn: in_feriado_nacional
+
+	column nm_feriado_nacional
+		dataType: string
+		lineageTag: 39adb18d-f889-4215-b4c6-d01aef88e639
+		summarizeBy: none
+		sourceColumn: nm_feriado_nacional
+
+	column AnoMes = FORMAT(dim_data[dt_data], "yyyy-MM")
+		lineageTag: c555e774-ad24-4877-ae39-d373ccff5965
+		summarizeBy: none
+		sortByColumn: nr_ano_mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_inicio_mes =
+			
+			DATE(
+			    YEAR(dim_data[dt_data]),
+			    MONTH(dim_data[dt_data]),
+			    1
+			)
+		formatString: General Date
+		lineageTag: 5fff9e8d-337f-4e7d-b40b-0f9e0742b6ee
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_data = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/dim_data.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_data", Int64.Type}, {"dt_data", type date}, {"nr_dia_mes", Int64.Type}, {"nr_dia_semana", Int64.Type}, {"nm_dia_semana", type text}, {"nr_mes", Int64.Type}, {"nm_mes", type text}, {"nr_bimestre", Int64.Type}, {"nm_bimestre", type text}, {"nr_trimestre", Int64.Type}, {"nm_trimestre", type text}, {"nr_semestre", Int64.Type}, {"nm_semestre", type text}, {"nr_ano", Int64.Type}, {"nr_ano_mes", Int64.Type}, {"in_fim_semana", Int64.Type}, {"in_feriado_nacional", Int64.Type}, {"nm_feriado_nacional", type text}}, "en-US")
+				in
+				  Tipos
+

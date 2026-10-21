@@ -1,0 +1,101 @@
+id_produto,cd_produto,nm_produto,nm_categoria,nm_marca,sg_unidade_medida
+1,PRD0001,Papel A4 - modelo 1,Papelaria,Marca 1,UN
+2,PRD0002,Caderno - modelo 1,Papelaria,Marca 2,UN
+3,PRD0003,Pasta - modelo 1,Organização,Marca 3,UN
+4,PRD0004,Organizador - modelo 1,Organização,Marca 4,UN
+5,PRD0005,Teclado USB - modelo 1,Periféricos,Marca 5,UN
+6,PRD0006,Mouse USB - modelo 1,Periféricos,Marca 1,UN
+7,PRD0007,Headset - modelo 1,Periféricos,Marca 2,UN
+8,PRD0008,Cabo HDMI - modelo 1,Acessórios de informática,Marca 3,UN
+9,PRD0009,Hub USB - modelo 1,Acessórios de informática,Marca 4,UN
+10,PRD0010,Suporte notebook - modelo 1,Acessórios de informática,Marca 5,UN
+11,PRD0011,Papel A4 - modelo 2,Papelaria,Marca 1,UN
+12,PRD0012,Caderno - modelo 2,Papelaria,Marca 2,UN
+13,PRD0013,Pasta - modelo 2,Organização,Marca 3,UN
+14,PRD0014,Organizador - modelo 2,Organização,Marca 4,UN
+15,PRD0015,Teclado USB - modelo 2,Periféricos,Marca 5,UN
+16,PRD0016,Mouse USB - modelo 2,Periféricos,Marca 1,UN
+17,PRD0017,Headset - modelo 2,Periféricos,Marca 2,UN
+18,PRD0018,Cabo HDMI - modelo 2,Acessórios de informática,Marca 3,UN
+19,PRD0019,Hub USB - modelo 2,Acessórios de informática,Marca 4,UN
+20,PRD0020,Suporte notebook - modelo 2,Acessórios de informática,Marca 5,UN
+21,PRD0021,Papel A4 - modelo 3,Papelaria,Marca 1,UN
+22,PRD0022,Caderno - modelo 3,Papelaria,Marca 2,UN
+23,PRD0023,Pasta - modelo 3,Organização,Marca 3,UN
+24,PRD0024,Organizador - modelo 3,Organização,Marca 4,UN
+25,PRD0025,Teclado USB - modelo 3,Periféricos,Marca 5,UN
+26,PRD0026,Mouse USB - modelo 3,Periféricos,Marca 1,UN
+27,PRD0027,Headset - modelo 3,Periféricos,Marca 2,UN
+28,PRD0028,Cabo HDMI - modelo 3,Acessórios de informática,Marca 3,UN
+29,PRD0029,Hub USB - modelo 3,Acessórios de informática,Marca 4,UN
+30,PRD0030,Suporte notebook - modelo 3,Acessórios de informática,Marca 5,UN
+31,PRD0031,Papel A4 - modelo 4,Papelaria,Marca 1,UN
+32,PRD0032,Caderno - modelo 4,Papelaria,Marca 2,UN
+33,PRD0033,Pasta - modelo 4,Organização,Marca 3,UN
+34,PRD0034,Organizador - modelo 4,Organização,Marca 4,UN
+35,PRD0035,Teclado USB - modelo 4,Periféricos,Marca 5,UN
+36,PRD0036,Mouse USB - modelo 4,Periféricos,Marca 1,UN
+37,PRD0037,Headset - modelo 4,Periféricos,Marca 2,UN
+38,PRD0038,Cabo HDMI - modelo 4,Acessórios de informática,Marca 3,UN
+39,PRD0039,Hub USB - modelo 4,Acessórios de informática,Marca 4,UN
+40,PRD0040,Suporte notebook - modelo 4,Acessórios de informática,Marca 5,UN
+41,PRD0041,Papel A4 - modelo 5,Papelaria,Marca 1,UN
+42,PRD0042,Caderno - modelo 5,Papelaria,Marca 2,UN
+43,PRD0043,Pasta - modelo 5,Organização,Marca 3,UN
+44,PRD0044,Organizador - modelo 5,Organização,Marca 4,UN
+45,PRD0045,Teclado USB - modelo 5,Periféricos,Marca 5,UN
+46,PRD0046,Mouse USB - modelo 5,Periféricos,Marca 1,UN
+47,PRD0047,Headset - modelo 5,Periféricos,Marca 2,UN
+48,PRD0048,Cabo HDMI - modelo 5,Acessórios de informática,Marca 3,UN
+49,PRD0049,Hub USB - modelo 5,Acessórios de informática,Marca 4,UN
+50,PRD0050,Suporte notebook - modelo 5,Acessórios de informática,Marca 5,UN
+51,PRD0051,Papel A4 - modelo 6,Papelaria,Marca 1,UN
+52,PRD0052,Caderno - modelo 6,Papelaria,Marca 2,UN
+53,PRD0053,Pasta - modelo 6,Organização,Marca 3,UN
+54,PRD0054,Organizador - modelo 6,Organização,Marca 4,UN
+55,PRD0055,Teclado USB - modelo 6,Periféricos,Marca 5,UN
+56,PRD0056,Mouse USB - modelo 6,Periféricos,Marca 1,UN
+57,PRD0057,Headset - modelo 6,Periféricos,Marca 2,UN
+58,PRD0058,Cabo HDMI - modelo 6,Acessórios de informática,Marca 3,UN
+59,PRD0059,Hub USB - modelo 6,Acessórios de informática,Marca 4,UN
+60,PRD0060,Suporte notebook - modelo 6,Acessórios de informática,Marca 5,UN
+61,PRD0061,Papel A4 - modelo 7,Papelaria,Marca 1,UN
+62,PRD0062,Caderno - modelo 7,Papelaria,Marca 2,UN
+63,PRD0063,Pasta - modelo 7,Organização,Marca 3,UN
+64,PRD0064,Organizador - modelo 7,Organização,Marca 4,UN
+65,PRD0065,Teclado USB - modelo 7,Periféricos,Marca 5,UN
+66,PRD0066,Mouse USB - modelo 7,Periféricos,Marca 1,UN
+67,PRD0067,Headset - modelo 7,Periféricos,Marca 2,UN
+68,PRD0068,Cabo HDMI - modelo 7,Acessórios de informática,Marca 3,UN
+69,PRD0069,Hub USB - modelo 7,Acessórios de informática,Marca 4,UN
+70,PRD0070,Suporte notebook - modelo 7,Acessórios de informática,Marca 5,UN
+71,PRD0071,Papel A4 - modelo 8,Papelaria,Marca 1,UN
+72,PRD0072,Caderno - modelo 8,Papelaria,Marca 2,UN
+73,PRD0073,Pasta - modelo 8,Organização,Marca 3,UN
+74,PRD0074,Organizador - modelo 8,Organização,Marca 4,UN
+75,PRD0075,Teclado USB - modelo 8,Periféricos,Marca 5,UN
+76,PRD0076,Mouse USB - modelo 8,Periféricos,Marca 1,UN
+77,PRD0077,Headset - modelo 8,Periféricos,Marca 2,UN
+78,PRD0078,Cabo HDMI - modelo 8,Acessórios de informática,Marca 3,UN
+79,PRD0079,Hub USB - modelo 8,Acessórios de informática,Marca 4,UN
+80,PRD0080,Suporte notebook - modelo 8,Acessórios de informática,Marca 5,UN
+81,PRD0081,Papel A4 - modelo 9,Papelaria,Marca 1,UN
+82,PRD0082,Caderno - modelo 9,Papelaria,Marca 2,UN
+83,PRD0083,Pasta - modelo 9,Organização,Marca 3,UN
+84,PRD0084,Organizador - modelo 9,Organização,Marca 4,UN
+85,PRD0085,Teclado USB - modelo 9,Periféricos,Marca 5,UN
+86,PRD0086,Mouse USB - modelo 9,Periféricos,Marca 1,UN
+87,PRD0087,Headset - modelo 9,Periféricos,Marca 2,UN
+88,PRD0088,Cabo HDMI - modelo 9,Acessórios de informática,Marca 3,UN
+89,PRD0089,Hub USB - modelo 9,Acessórios de informática,Marca 4,UN
+90,PRD0090,Suporte notebook - modelo 9,Acessórios de informática,Marca 5,UN
+91,PRD0091,Papel A4 - modelo 10,Papelaria,Marca 1,UN
+92,PRD0092,Caderno - modelo 10,Papelaria,Marca 2,UN
+93,PRD0093,Pasta - modelo 10,Organização,Marca 3,UN
+94,PRD0094,Organizador - modelo 10,Organização,Marca 4,UN
+95,PRD0095,Teclado USB - modelo 10,Periféricos,Marca 5,UN
+96,PRD0096,Mouse USB - modelo 10,Periféricos,Marca 1,UN
+97,PRD0097,Headset - modelo 10,Periféricos,Marca 2,UN
+98,PRD0098,Cabo HDMI - modelo 10,Acessórios de informática,Marca 3,UN
+99,PRD0099,Hub USB - modelo 10,Acessórios de informática,Marca 4,UN
+100,PRD0100,Suporte notebook - modelo 10,Acessórios de informática,Marca 5,UN

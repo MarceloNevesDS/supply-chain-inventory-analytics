@@ -1,0 +1,329 @@
+table fato_estoque_diario
+	lineageTag: 7b8100f6-3540-43b9-9011-0a115359f12c
+
+	measure 'Data de referência' =
+			VAR Primeira = MIN(dim_data[dt_data])
+			VAR Selecionada = MAX(dim_data[dt_data])
+			VAR Carga = CALCULATE(MAX(fato_estoque_diario[dt_estoque]), REMOVEFILTERS())
+			RETURN IF(Primeira > Carga, BLANK(), MIN(Selecionada, Carga))
+		formatString: dd/MM/yyyy
+		displayFolder: Estoque
+		lineageTag: 8b3b5787-cfa6-41ff-80f0-f2c7deff7566
+
+	measure 'Valor do estoque' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[vl_estoque_final]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: R$ #,0.00
+		displayFolder: Estoque
+		lineageTag: cf271c59-fe94-463c-b348-629af8d274b1
+
+	measure 'Saldo em unidades' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_saldo_final]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: 1b69b447-e19a-4f2d-84df-46e0af8d697d
+
+	measure 'Compra pendente em unidades' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_compra_pendente]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: 7482c0eb-af9c-4636-8097-1fe743132b2d
+
+	measure 'Combinações em risco' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_risco_espera]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: 0be61028-4db0-4eec-beff-23a03bf05918
+
+	measure 'Combinações sem saída' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_sem_saida]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: 6328a59a-f02f-4d58-86ab-6abd88c43e7c
+
+	measure 'Combinações com cobertura elevada' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_cobertura_elevada]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: db9f0738-14fb-4258-8292-ce2b2a242703
+
+	measure 'Combinações sem saldo' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_indisponivel]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: 43b083d6-5732-4ee8-8ddf-75b5812a6bcc
+
+	measure 'Combinações para repor' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_reposicao]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: 3902571a-caed-4dc7-b3d4-6872170acde3
+
+	measure 'Demanda média diária' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_demanda_media_dia]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0.00
+		displayFolder: Estoque
+		lineageTag: 2b7063d6-02e4-4c3a-856f-dbb87f2fef6b
+
+	measure 'Ponto de reposição' =
+			VAR Ref = [Data de referência]
+			RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_ponto_reposicao]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		formatString: #,0
+		displayFolder: Estoque
+		lineageTag: 4f427716-2eaf-40c6-88da-092e163afb59
+
+	measure 'Cobertura em dias' = IF(HASONEVALUE(dim_produto[id_produto]) && HASONEVALUE(dim_centro_distribuicao[id_centro_distribuicao]), DIVIDE([Saldo em unidades], [Demanda média diária]))
+		formatString: #,0.0
+		displayFolder: Estoque
+		lineageTag: 2be1db6b-6759-488d-a585-0acdb500cf26
+
+	measure 'Situação do estoque' =
+			VAR Ref = [Data de referência]
+			RETURN IF(HASONEVALUE(dim_produto[id_produto]) && HASONEVALUE(dim_centro_distribuicao[id_centro_distribuicao]), CALCULATE(SELECTEDVALUE(fato_estoque_diario[tx_situacao_estoque]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+		displayFolder: Estoque
+		lineageTag: caec49ff-c244-4516-8b39-3a52ed751649
+
+	measure 'Unidades expedidas' = CALCULATE(SUM(fato_movimento_estoque[qt_movimento]), dim_tipo_movimento[cd_tipo_movimento] = "EXPEDICAO")
+		formatString: #,0
+		displayFolder: Operação
+		lineageTag: d2289f7c-ee20-4cc9-b289-963364d9effa
+
+	measure 'Custo das expedições' = -CALCULATE(SUM(fato_movimento_estoque[vl_movimento_assinado]), dim_tipo_movimento[cd_tipo_movimento] = "EXPEDICAO")
+		formatString: R$ #,0.00
+		displayFolder: Operação
+		lineageTag: e6d41ab5-cd83-47f0-a1d7-b1280960195b
+
+	measure 'Valor comprado' = SUM(fato_item_compra[vl_total_item])
+		formatString: R$ #,0.00
+		displayFolder: Compras
+		lineageTag: 49d67218-c358-414d-b476-e0165aefa9e4
+
+	measure 'Pedidos emitidos' = DISTINCTCOUNT(fato_item_compra[nr_pedido])
+		formatString: #,0
+		displayFolder: Compras
+		lineageTag: 64b9b9e8-3341-41d3-9e83-4ccbb7a9d5f9
+
+	measure 'Valor recebido' = SUM(fato_recebimento[vl_total_recebido])
+		formatString: R$ #,0.00
+		displayFolder: Compras
+		lineageTag: 2ae43211-60a9-401c-a93b-46a907128286
+
+	measure 'Unidades recebidas' = SUM(fato_recebimento[qt_recebida])
+		formatString: #,0
+		displayFolder: Compras
+		lineageTag: e2dbb1e4-c87f-4b5e-a7f4-3f2b87c8128d
+
+	measure 'Itens vencidos no corte final' = SUM(fato_item_compra[in_vencido_ate_referencia])
+		formatString: #,0
+		displayFolder: Fornecedores • posição final
+		lineageTag: 893fc11c-f963-488e-9b96-34dae25c2011
+
+	measure 'Itens integrais no prazo' = SUM(fato_item_compra[in_integral_no_prazo])
+		formatString: #,0
+		displayFolder: Fornecedores • posição final
+		lineageTag: fd8f6db3-6f3d-4a2d-9696-8f7c84e6b46d
+
+	measure 'Pontualidade no corte final' = DIVIDE([Itens integrais no prazo], [Itens vencidos no corte final])
+		formatString: 0.0%
+		displayFolder: Fornecedores • posição final
+		lineageTag: a1621455-238b-4817-89b2-d46489ec2c4c
+
+	measure 'Itens pendentes atrasados' = SUM(fato_item_compra[in_pendente_atrasado])
+		formatString: #,0
+		displayFolder: Fornecedores • posição final
+		lineageTag: e6efaaf2-04a1-4b89-81a3-7ff5f4751652
+
+	measure 'Prazo médio de entrega (dias)' = AVERAGE(fato_item_compra[nr_dias_entrega_completa])
+		formatString: #,0.0
+		displayFolder: Fornecedores • posição final
+		lineageTag: 25d7e52a-9e1e-41a4-974a-7179b5ebcb4d
+
+	measure 'Unidades ajustadas' = CALCULATE(SUM(fato_movimento_estoque[qt_movimento]), dim_tipo_movimento[cd_tipo_movimento] IN {"AJUSTE_POSITIVO", "AJUSTE_NEGATIVO"})
+		formatString: #,0
+		displayFolder: Operação
+		lineageTag: ac405bce-cc63-48ea-9c5f-18355886dcfb
+
+	measure 'Valor líquido dos ajustes' = CALCULATE(SUM(fato_movimento_estoque[vl_movimento_assinado]), dim_tipo_movimento[cd_tipo_movimento] IN {"AJUSTE_POSITIVO", "AJUSTE_NEGATIVO"})
+		formatString: R$ #,0.00
+		displayFolder: Operação
+		lineageTag: c67c0590-8155-41cd-848d-655b101464cc
+
+	measure 'Quantidade movimentada' = SUM(fato_movimento_estoque[qt_movimento])
+		formatString: #,0
+		displayFolder: Operação
+		lineageTag: fadaeb1d-0e67-43f8-bdbc-c363e03d0bb0
+
+	measure 'Valor líquido movimentado' = SUM(fato_movimento_estoque[vl_movimento_assinado])
+		formatString: R$ #,0.00
+		displayFolder: Operação
+		lineageTag: fc3838d4-aff9-4e6b-a830-2d39e36e6a00
+
+	column id_data_estoque
+		dataType: int64
+		isHidden
+		lineageTag: f1dea058-89c6-4284-b411-4dc910d68d1b
+		summarizeBy: none
+		sourceColumn: id_data_estoque
+
+	column id_produto
+		dataType: int64
+		isHidden
+		lineageTag: 8ecfe9d0-c1d5-44e6-a2b1-7ea1e5ce41be
+		summarizeBy: none
+		sourceColumn: id_produto
+
+	column id_centro_distribuicao
+		dataType: int64
+		isHidden
+		lineageTag: de29081c-3994-457b-8ecb-03e279f3cc9e
+		summarizeBy: none
+		sourceColumn: id_centro_distribuicao
+
+	column qt_saldo_final
+		dataType: int64
+		lineageTag: 99ff4a81-a5eb-4107-8e91-fefe58b38ebb
+		summarizeBy: none
+		sourceColumn: qt_saldo_final
+
+	column vl_custo_medio
+		dataType: double
+		lineageTag: 2ef6663c-d435-4e5d-9346-d6555d6dbbb9
+		summarizeBy: none
+		sourceColumn: vl_custo_medio
+
+	column vl_estoque_final
+		dataType: double
+		lineageTag: 1a21a49d-5d5c-4c71-a0d5-ef3d3194ccd5
+		summarizeBy: none
+		sourceColumn: vl_estoque_final
+
+	column qt_compra_pendente
+		dataType: int64
+		lineageTag: b88c0b20-58cb-4d83-97bb-4fba685de351
+		summarizeBy: none
+		sourceColumn: qt_compra_pendente
+
+	column nr_dias_reposicao
+		dataType: int64
+		lineageTag: 3d85ee0b-895d-4d45-9540-2b28cca81e59
+		summarizeBy: none
+		sourceColumn: nr_dias_reposicao
+
+	column nr_dias_seguranca
+		dataType: int64
+		lineageTag: af3a332b-783c-4537-8f6a-64e7bbe8add4
+		summarizeBy: none
+		sourceColumn: nr_dias_seguranca
+
+	column dt_estoque
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 3ba810ea-babc-4df4-883a-bfd25fb79a47
+		summarizeBy: none
+		sourceColumn: dt_estoque
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column qt_expedida_dia
+		dataType: int64
+		lineageTag: e47084b8-dffe-4d78-b26a-3b4894628b97
+		summarizeBy: none
+		sourceColumn: qt_expedida_dia
+
+	column qt_expedida_90d
+		dataType: int64
+		lineageTag: 3ed89953-5218-4f36-a23d-447a5110617a
+		summarizeBy: none
+		sourceColumn: qt_expedida_90d
+
+	column nr_dias_observados
+		dataType: int64
+		lineageTag: 39d2ade2-83f8-4e98-b0e5-6c17b51b20db
+		summarizeBy: none
+		sourceColumn: nr_dias_observados
+
+	column qt_demanda_media_dia
+		dataType: double
+		lineageTag: 454a8e6a-e534-48de-a809-becc08a4fd0d
+		summarizeBy: none
+		sourceColumn: qt_demanda_media_dia
+
+	column qt_posicao_estoque
+		dataType: int64
+		lineageTag: c334a7dd-e261-482b-9c82-4f22c33c97a6
+		summarizeBy: none
+		sourceColumn: qt_posicao_estoque
+
+	column qt_estoque_seguranca
+		dataType: int64
+		lineageTag: b3446034-5fbd-4e67-9709-dc8944183483
+		summarizeBy: none
+		sourceColumn: qt_estoque_seguranca
+
+	column qt_ponto_reposicao
+		dataType: int64
+		lineageTag: b5ff2f73-f714-4360-a7fe-ace47311890a
+		summarizeBy: none
+		sourceColumn: qt_ponto_reposicao
+
+	column nr_dias_cobertura
+		dataType: double
+		lineageTag: 3eb4f88e-718c-4c12-97d4-8f351252d30a
+		summarizeBy: none
+		sourceColumn: nr_dias_cobertura
+
+	column in_reposicao
+		dataType: int64
+		lineageTag: 5a197b46-2ff7-41f3-8e12-6cfd1de1ced6
+		summarizeBy: none
+		sourceColumn: in_reposicao
+
+	column in_risco_espera
+		dataType: int64
+		lineageTag: 22381bb0-2ef5-41c5-83b7-93ceb107f69c
+		summarizeBy: none
+		sourceColumn: in_risco_espera
+
+	column in_cobertura_elevada
+		dataType: int64
+		lineageTag: d99b31da-34a2-4c2f-aec4-6f999bd251b4
+		summarizeBy: none
+		sourceColumn: in_cobertura_elevada
+
+	column in_sem_saida
+		dataType: int64
+		lineageTag: 880e50ff-5c94-498f-a436-075ba332b977
+		summarizeBy: none
+		sourceColumn: in_sem_saida
+
+	column in_indisponivel
+		dataType: int64
+		lineageTag: 0008c1c5-a831-4e20-9115-319463a68208
+		summarizeBy: none
+		sourceColumn: in_indisponivel
+
+	column tx_situacao_estoque
+		dataType: string
+		lineageTag: 0ab5c5ef-9ad8-4642-807f-ff66639ddc4b
+		summarizeBy: none
+		sourceColumn: tx_situacao_estoque
+
+	partition fato_estoque_diario = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/fato_estoque_diario.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_data_estoque", Int64.Type}, {"id_produto", Int64.Type}, {"id_centro_distribuicao", Int64.Type}, {"qt_saldo_final", Int64.Type}, {"vl_custo_medio", type number}, {"vl_estoque_final", type number}, {"qt_compra_pendente", Int64.Type}, {"nr_dias_reposicao", Int64.Type}, {"nr_dias_seguranca", Int64.Type}, {"dt_estoque", type date}, {"qt_expedida_dia", Int64.Type}, {"qt_expedida_90d", Int64.Type}, {"nr_dias_observados", Int64.Type}, {"qt_demanda_media_dia", type number}, {"qt_posicao_estoque", Int64.Type}, {"qt_estoque_seguranca", Int64.Type}, {"qt_ponto_reposicao", Int64.Type}, {"nr_dias_cobertura", type number}, {"in_reposicao", Int64.Type}, {"in_risco_espera", Int64.Type}, {"in_cobertura_elevada", Int64.Type}, {"in_sem_saida", Int64.Type}, {"in_indisponivel", Int64.Type}, {"tx_situacao_estoque", type text}}, "en-US")
+				in
+				  Tipos
+

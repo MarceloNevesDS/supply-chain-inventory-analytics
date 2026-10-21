@@ -1,0 +1,51 @@
+table dim_produto
+	lineageTag: 19bba09b-44d8-4833-9567-b4f24d8d69f8
+
+	column id_produto
+		dataType: int64
+		isHidden
+		lineageTag: f8256830-252d-437a-8f57-a397eb59573b
+		summarizeBy: none
+		sourceColumn: id_produto
+
+	column cd_produto
+		dataType: string
+		lineageTag: dad6eb1c-2720-4481-8aa7-6c90292318ca
+		summarizeBy: none
+		sourceColumn: cd_produto
+
+	column nm_produto
+		dataType: string
+		lineageTag: ede5cd11-b17c-4b2c-8d4f-644f6ae11681
+		summarizeBy: none
+		sourceColumn: nm_produto
+
+	column nm_categoria
+		dataType: string
+		lineageTag: 598cd6a3-2455-46a9-98dd-266038bc9c6a
+		summarizeBy: none
+		sourceColumn: nm_categoria
+
+	column nm_marca
+		dataType: string
+		lineageTag: bc25982d-fca1-4588-bdf9-e7546d35e265
+		summarizeBy: none
+		sourceColumn: nm_marca
+
+	column sg_unidade_medida
+		dataType: string
+		lineageTag: a1d2526e-a0de-484d-8845-0cb822a9c0b3
+		summarizeBy: none
+		sourceColumn: sg_unidade_medida
+
+	partition dim_produto = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/dim_produto.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_produto", Int64.Type}, {"cd_produto", type text}, {"nm_produto", type text}, {"nm_categoria", type text}, {"nm_marca", type text}, {"sg_unidade_medida", type text}}, "en-US")
+				in
+				  Tipos
+

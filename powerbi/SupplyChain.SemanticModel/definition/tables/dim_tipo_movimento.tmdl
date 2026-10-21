@@ -1,0 +1,39 @@
+table dim_tipo_movimento
+	lineageTag: 40edc562-f021-4312-856e-a6fa733ed4af
+
+	column id_tipo_movimento
+		dataType: int64
+		isHidden
+		lineageTag: 3bf23ada-ac20-46b6-84d3-11d7ef93ccf7
+		summarizeBy: none
+		sourceColumn: id_tipo_movimento
+
+	column cd_tipo_movimento
+		dataType: string
+		lineageTag: 4012f01e-ed3b-428f-8e76-38e5e508c0b9
+		summarizeBy: none
+		sourceColumn: cd_tipo_movimento
+
+	column tx_tipo_movimento
+		dataType: string
+		lineageTag: 52f73904-9eb7-48fe-a4dc-ccfb2630c1e3
+		summarizeBy: none
+		sourceColumn: tx_tipo_movimento
+
+	column nr_sinal
+		dataType: int64
+		lineageTag: 187978c9-beaa-493f-9668-ee1eba239f4d
+		summarizeBy: none
+		sourceColumn: nr_sinal
+
+	partition dim_tipo_movimento = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/dim_tipo_movimento.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_tipo_movimento", Int64.Type}, {"cd_tipo_movimento", type text}, {"tx_tipo_movimento", type text}, {"nr_sinal", Int64.Type}}, "en-US")
+				in
+				  Tipos
+

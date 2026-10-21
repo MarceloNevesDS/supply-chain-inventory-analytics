@@ -1,0 +1,51 @@
+table dim_centro_distribuicao
+	lineageTag: d7a30f8c-6aec-4dc0-8e16-bc49cea4e7ad
+
+	column id_centro_distribuicao
+		dataType: int64
+		isHidden
+		lineageTag: 47b370f8-d9da-4398-9def-a33e76dfa374
+		summarizeBy: none
+		sourceColumn: id_centro_distribuicao
+
+	column cd_centro_distribuicao
+		dataType: string
+		lineageTag: 7afaea2a-d5bb-4d35-8cb1-5b50a56d5386
+		summarizeBy: none
+		sourceColumn: cd_centro_distribuicao
+
+	column nm_centro_distribuicao
+		dataType: string
+		lineageTag: c53221fb-6abb-4644-a9ec-f01635ec5daf
+		summarizeBy: none
+		sourceColumn: nm_centro_distribuicao
+
+	column nm_cidade
+		dataType: string
+		lineageTag: fc618353-9323-4754-b07b-9d5df4d439d3
+		summarizeBy: none
+		sourceColumn: nm_cidade
+
+	column sg_uf
+		dataType: string
+		lineageTag: 9386a20f-53fe-433e-a87f-0b97dfc878ba
+		summarizeBy: none
+		sourceColumn: sg_uf
+
+	column nm_regiao
+		dataType: string
+		lineageTag: 1a00acba-a2de-4c66-a432-a91c776f551e
+		summarizeBy: none
+		sourceColumn: nm_regiao
+
+	partition dim_centro_distribuicao = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/dim_centro_distribuicao.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_centro_distribuicao", Int64.Type}, {"cd_centro_distribuicao", type text}, {"nm_centro_distribuicao", type text}, {"nm_cidade", type text}, {"sg_uf", type text}, {"nm_regiao", type text}}, "en-US")
+				in
+				  Tipos
+

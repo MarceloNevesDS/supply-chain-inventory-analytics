@@ -1,0 +1,13 @@
+id_fornecedor,cd_fornecedor,nm_fornecedor,nm_cidade,sg_uf,nm_regiao
+1,FOR001,Fornecedor fictício 01,Brasília,DF,Centro-Oeste
+2,FOR002,Fornecedor fictício 02,São Paulo,SP,Sudeste
+3,FOR003,Fornecedor fictício 03,Curitiba,PR,Sul
+4,FOR004,Fornecedor fictício 04,Brasília,DF,Centro-Oeste
+5,FOR005,Fornecedor fictício 05,São Paulo,SP,Sudeste
+6,FOR006,Fornecedor fictício 06,Curitiba,PR,Sul
+7,FOR007,Fornecedor fictício 07,Brasília,DF,Centro-Oeste
+8,FOR008,Fornecedor fictício 08,São Paulo,SP,Sudeste
+9,FOR009,Fornecedor fictício 09,Curitiba,PR,Sul
+10,FOR010,Fornecedor fictício 10,Brasília,DF,Centro-Oeste
+11,FOR011,Fornecedor fictício 11,São Paulo,SP,Sudeste
+12,FOR012,Fornecedor fictício 12,Curitiba,PR,Sul

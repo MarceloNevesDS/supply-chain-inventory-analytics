@@ -1,0 +1,81 @@
+table fato_recebimento
+	lineageTag: 44b19914-33d0-4c10-8030-c2d366b62b09
+
+	column id_recebimento
+		dataType: int64
+		isHidden
+		lineageTag: eec3ddf6-c42b-41f3-aa3c-291c8c41f0d0
+		summarizeBy: none
+		sourceColumn: id_recebimento
+
+	column id_item_compra
+		dataType: int64
+		isHidden
+		lineageTag: 30dc622f-f9ef-40ab-8897-bd346d5820b0
+		summarizeBy: none
+		sourceColumn: id_item_compra
+
+	column id_produto
+		dataType: int64
+		isHidden
+		lineageTag: 11c05d15-0e1f-4f8e-954e-e0db32c2445b
+		summarizeBy: none
+		sourceColumn: id_produto
+
+	column id_fornecedor
+		dataType: int64
+		isHidden
+		lineageTag: d45abb3c-6200-4795-8b23-fe4aea07421f
+		summarizeBy: none
+		sourceColumn: id_fornecedor
+
+	column id_centro_distribuicao
+		dataType: int64
+		isHidden
+		lineageTag: b33772e3-0db2-407e-b533-d7ee39416a2a
+		summarizeBy: none
+		sourceColumn: id_centro_distribuicao
+
+	column id_data_recebimento
+		dataType: int64
+		isHidden
+		lineageTag: 59bf7923-1748-4cbc-84ad-63d92af1bfed
+		summarizeBy: none
+		sourceColumn: id_data_recebimento
+
+	column dt_recebimento
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 92277d45-84d4-420f-aa28-e00d5b152a93
+		summarizeBy: none
+		sourceColumn: dt_recebimento
+
+	column qt_recebida
+		dataType: int64
+		lineageTag: 994cf4c3-dd87-4e0f-8d74-3c7cf855995f
+		summarizeBy: none
+		sourceColumn: qt_recebida
+
+	column vl_custo_unitario_recebido
+		dataType: double
+		lineageTag: 19da40f5-bdbd-46a8-9750-c5cc4c18fc12
+		summarizeBy: none
+		sourceColumn: vl_custo_unitario_recebido
+
+	column vl_total_recebido
+		dataType: double
+		lineageTag: f19ac302-8d66-4a84-ae09-6be6353d8507
+		summarizeBy: none
+		sourceColumn: vl_total_recebido
+
+	partition fato_recebimento = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/fato_recebimento.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_recebimento", Int64.Type}, {"id_item_compra", Int64.Type}, {"id_produto", Int64.Type}, {"id_fornecedor", Int64.Type}, {"id_centro_distribuicao", Int64.Type}, {"id_data_recebimento", Int64.Type}, {"dt_recebimento", type datetime}, {"qt_recebida", Int64.Type}, {"vl_custo_unitario_recebido", type number}, {"vl_total_recebido", type number}}, "en-US")
+				in
+				  Tipos
+

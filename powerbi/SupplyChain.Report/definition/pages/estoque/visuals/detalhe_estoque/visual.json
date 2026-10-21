@@ -1,0 +1,240 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "detalhe_estoque",
+  "position": {
+    "x": 24,
+    "y": 270,
+    "z": 19,
+    "height": 590,
+    "width": 1386,
+    "tabOrder": 19
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_produto"
+                    }
+                  },
+                  "Property": "nm_produto"
+                }
+              },
+              "queryRef": "dim_produto.nm_produto",
+              "nativeQueryRef": "nm_produto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_centro_distribuicao"
+                    }
+                  },
+                  "Property": "nm_centro_distribuicao"
+                }
+              },
+              "queryRef": "dim_centro_distribuicao.nm_centro_distribuicao",
+              "nativeQueryRef": "nm_centro_distribuicao"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_estoque_diario"
+                    }
+                  },
+                  "Property": "Saldo em unidades"
+                }
+              },
+              "queryRef": "fato_estoque_diario.Saldo em unidades",
+              "nativeQueryRef": "Saldo em unidades"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_estoque_diario"
+                    }
+                  },
+                  "Property": "Compra pendente em unidades"
+                }
+              },
+              "queryRef": "fato_estoque_diario.Compra pendente em unidades",
+              "nativeQueryRef": "Compra pendente em unidades"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_estoque_diario"
+                    }
+                  },
+                  "Property": "Demanda média diária"
+                }
+              },
+              "queryRef": "fato_estoque_diario.Demanda média diária",
+              "nativeQueryRef": "Demanda média diária"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_estoque_diario"
+                    }
+                  },
+                  "Property": "Ponto de reposição"
+                }
+              },
+              "queryRef": "fato_estoque_diario.Ponto de reposição",
+              "nativeQueryRef": "Ponto de reposição"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_estoque_diario"
+                    }
+                  },
+                  "Property": "Cobertura em dias"
+                }
+              },
+              "queryRef": "fato_estoque_diario.Cobertura em dias",
+              "nativeQueryRef": "Cobertura em dias"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fato_estoque_diario"
+                    }
+                  },
+                  "Property": "Situação do estoque"
+                }
+              },
+              "queryRef": "fato_estoque_diario.Situação do estoque",
+              "nativeQueryRef": "Situação do estoque"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fato_estoque_diario"
+                  }
+                },
+                "Property": "Cobertura em dias"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Posição por produto e centro • cobertura em dias; demanda zero sem cobertura calculável'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

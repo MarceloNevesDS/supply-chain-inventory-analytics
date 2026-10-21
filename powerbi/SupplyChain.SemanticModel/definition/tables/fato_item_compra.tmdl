@@ -1,0 +1,148 @@
+table fato_item_compra
+	lineageTag: ab9018ee-a7ad-439a-ba53-baaf07d370de
+
+	column id_item_compra
+		dataType: int64
+		isHidden
+		lineageTag: bfdd745d-6041-4918-9314-13a522b2137d
+		summarizeBy: none
+		sourceColumn: id_item_compra
+
+	column nr_pedido
+		dataType: string
+		lineageTag: 7e5021f8-a987-4d2a-9054-635b6240642a
+		summarizeBy: none
+		sourceColumn: nr_pedido
+
+	column nr_item
+		dataType: int64
+		lineageTag: 549455c3-c1c8-422c-a85c-f07907ad6e26
+		summarizeBy: none
+		sourceColumn: nr_item
+
+	column id_produto
+		dataType: int64
+		isHidden
+		lineageTag: 00134bec-0ed8-4e0c-8f49-2875e71e4f41
+		summarizeBy: none
+		sourceColumn: id_produto
+
+	column id_fornecedor
+		dataType: int64
+		isHidden
+		lineageTag: e5c3dc7b-8ccd-444c-8fc8-0b459b6033de
+		summarizeBy: none
+		sourceColumn: id_fornecedor
+
+	column id_centro_distribuicao
+		dataType: int64
+		isHidden
+		lineageTag: 62e4b378-74bb-4ff5-a3ff-3c62d95e563f
+		summarizeBy: none
+		sourceColumn: id_centro_distribuicao
+
+	column id_data_emissao
+		dataType: int64
+		isHidden
+		lineageTag: e7f3cc83-de11-463c-9aab-a2a49f314803
+		summarizeBy: none
+		sourceColumn: id_data_emissao
+
+	column id_data_prevista
+		dataType: int64
+		isHidden
+		lineageTag: 45d019c5-3c44-464e-b0fe-9b70256a1828
+		summarizeBy: none
+		sourceColumn: id_data_prevista
+
+	column qt_pedida
+		dataType: int64
+		lineageTag: 15fc3161-d34a-4ab0-bca7-51ded2c3a6b3
+		summarizeBy: none
+		sourceColumn: qt_pedida
+
+	column vl_custo_unitario_pedido
+		dataType: double
+		lineageTag: ebafffe2-06b1-4ef3-b07c-4c4f295048c4
+		summarizeBy: none
+		sourceColumn: vl_custo_unitario_pedido
+
+	column vl_total_item
+		dataType: double
+		lineageTag: cfd3f541-3a83-44c7-a092-b06bf4838c5b
+		summarizeBy: none
+		sourceColumn: vl_total_item
+
+	column id_data_referencia
+		dataType: int64
+		isHidden
+		lineageTag: d09bc953-ec58-408e-8076-5b9064a9cc07
+		summarizeBy: none
+		sourceColumn: id_data_referencia
+
+	column qt_recebida
+		dataType: int64
+		lineageTag: 29a58635-8274-47e4-8844-17d0d3249f9b
+		summarizeBy: none
+		sourceColumn: qt_recebida
+
+	column qt_pendente
+		dataType: int64
+		lineageTag: 48114b1e-1a11-455e-a167-53f34575bf3e
+		summarizeBy: none
+		sourceColumn: qt_pendente
+
+	column qt_recebida_no_prazo
+		dataType: int64
+		lineageTag: f5c2ef7e-3efb-477e-b939-a4b4c931b08e
+		summarizeBy: none
+		sourceColumn: qt_recebida_no_prazo
+
+	column id_data_conclusao
+		dataType: int64
+		isHidden
+		lineageTag: 94e2a02e-0ce7-4ed4-92c1-425e58bf69f7
+		summarizeBy: none
+		sourceColumn: id_data_conclusao
+
+	column in_vencido_ate_referencia
+		dataType: int64
+		lineageTag: c6ad16fa-6f3f-404e-ae29-ef2a8e8def55
+		summarizeBy: none
+		sourceColumn: in_vencido_ate_referencia
+
+	column in_integral_no_prazo
+		dataType: int64
+		lineageTag: 3ec5ae7a-4715-465c-8b72-72064294bd9e
+		summarizeBy: none
+		sourceColumn: in_integral_no_prazo
+
+	column tx_status
+		dataType: string
+		lineageTag: e80855c6-e591-4c50-8285-8477eb208eaa
+		summarizeBy: none
+		sourceColumn: tx_status
+
+	column nr_dias_entrega_completa
+		dataType: int64
+		lineageTag: f4e7dab0-cf4f-41c7-b9f6-085052e4c1d5
+		summarizeBy: none
+		sourceColumn: nr_dias_entrega_completa
+
+	column in_pendente_atrasado
+		dataType: int64
+		lineageTag: 195fca67-85ba-41b3-bb8c-29b07f02c29a
+		summarizeBy: none
+		sourceColumn: in_pendente_atrasado
+
+	partition fato_item_compra = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/fato_item_compra.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_item_compra", Int64.Type}, {"nr_pedido", type text}, {"nr_item", Int64.Type}, {"id_produto", Int64.Type}, {"id_fornecedor", Int64.Type}, {"id_centro_distribuicao", Int64.Type}, {"id_data_emissao", Int64.Type}, {"id_data_prevista", Int64.Type}, {"qt_pedida", Int64.Type}, {"vl_custo_unitario_pedido", type number}, {"vl_total_item", type number}, {"id_data_referencia", Int64.Type}, {"qt_recebida", Int64.Type}, {"qt_pendente", Int64.Type}, {"qt_recebida_no_prazo", Int64.Type}, {"id_data_conclusao", Int64.Type}, {"in_vencido_ate_referencia", Int64.Type}, {"in_integral_no_prazo", Int64.Type}, {"tx_status", type text}, {"nr_dias_entrega_completa", Int64.Type}, {"in_pendente_atrasado", Int64.Type}}, "en-US")
+				in
+				  Tipos
+

@@ -1,0 +1,6 @@
+id_tipo_movimento,cd_tipo_movimento,tx_tipo_movimento,nr_sinal
+1,ABERTURA,Saldo inicial,1
+2,RECEBIMENTO_COMPRA,Recebimento de compra,1
+3,EXPEDICAO,Expedição para cliente,-1
+4,AJUSTE_POSITIVO,Ajuste positivo de inventário,1
+5,AJUSTE_NEGATIVO,Ajuste negativo de inventário,-1

@@ -1,0 +1,13 @@
+{
+  "testes_aprovados": 8,
+  "casos": [
+    "Custo médio 10@20 + 10@30 = 25",
+    "Custo médio 0@99 + 5@12 = 12",
+    "Custo médio 10@25 + 5@25 = 25",
+    "Custo médio 3@10 + 2@11 = 10.4",
+    "Recebimento acima do pedido",
+    "Produto divergente na origem",
+    "Pendência diária adulterada",
+    "Valor do fechamento adulterado"
+  ]
+}

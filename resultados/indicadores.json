@@ -1,0 +1,73 @@
+{
+  "consultas_executadas": [
+    {
+      "consulta": 1,
+      "linhas": 3
+    },
+    {
+      "consulta": 2,
+      "linhas": 24
+    },
+    {
+      "consulta": 3,
+      "linhas": 300
+    },
+    {
+      "consulta": 4,
+      "linhas": 12
+    },
+    {
+      "consulta": 5,
+      "linhas": 96
+    },
+    {
+      "consulta": 6,
+      "linhas": 6
+    },
+    {
+      "consulta": 7,
+      "linhas": 291
+    },
+    {
+      "consulta": 8,
+      "linhas": 2315
+    },
+    {
+      "consulta": 9,
+      "linhas": 2
+    },
+    {
+      "consulta": 10,
+      "linhas": 1716
+    }
+  ],
+  "csv_exportados": {
+    "dim_data": 791,
+    "dim_produto": 100,
+    "dim_fornecedor": 12,
+    "dim_centro_distribuicao": 3,
+    "dim_tipo_movimento": 5,
+    "fato_recebimento": 9013,
+    "fato_movimento_estoque": 203550,
+    "fato_estoque_diario": 219300,
+    "fato_item_compra": 6821
+  },
+  "validacao_indicadores": "219300 linhas conferidas",
+  "corte": "2025-12-31",
+  "snapshot": {
+    "vl_estoque": 2951164.5,
+    "qt_saldo": 34875,
+    "qt_pendente": 25637,
+    "nr_risco": 90,
+    "nr_sem_saida": 6,
+    "nr_cobertura_elevada": 0,
+    "nr_indisponivel": 18,
+    "nr_reposicao": 1
+  },
+  "fornecedores": {
+    "nr_integral_prazo": 1832,
+    "nr_vencidos": 6720,
+    "nr_pendentes_atrasados": 26,
+    "pc_pontualidade": 0.2726190476190476
+  }
+}

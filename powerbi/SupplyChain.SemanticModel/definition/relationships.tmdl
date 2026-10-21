@@ -1,0 +1,65 @@
+relationship 3a19fe94-17ad-5193-86c6-db2ce97c3882
+	fromColumn: fato_estoque_diario.id_produto
+	toColumn: dim_produto.id_produto
+
+relationship be0c72fb-bca3-598c-a183-7ddbb8c9cde4
+	fromColumn: fato_estoque_diario.id_centro_distribuicao
+	toColumn: dim_centro_distribuicao.id_centro_distribuicao
+
+relationship eb372c7f-076d-56ff-88e7-4c0609d738b5
+	fromColumn: fato_estoque_diario.id_data_estoque
+	toColumn: dim_data.id_data
+
+relationship 1b0732e0-c8b9-5f29-9d75-49a87bbd1691
+	fromColumn: fato_item_compra.id_produto
+	toColumn: dim_produto.id_produto
+
+relationship 2bad19da-535d-5bda-b571-727c86b0d944
+	fromColumn: fato_item_compra.id_centro_distribuicao
+	toColumn: dim_centro_distribuicao.id_centro_distribuicao
+
+relationship 1256bace-2174-538c-ada1-41a8ea9f15bf
+	fromColumn: fato_item_compra.id_fornecedor
+	toColumn: dim_fornecedor.id_fornecedor
+
+relationship 6d8c86e2-2505-5c2e-8058-65887c1bcfb7
+	fromColumn: fato_item_compra.id_data_emissao
+	toColumn: dim_data.id_data
+
+relationship 88e52842-687e-51f1-9c01-060f90d84c1b
+	isActive: false
+	fromColumn: fato_item_compra.id_data_prevista
+	toColumn: dim_data.id_data
+
+relationship c5719731-2362-5d4d-8b04-dbc70a22c323
+	fromColumn: fato_movimento_estoque.id_produto
+	toColumn: dim_produto.id_produto
+
+relationship c20d0b93-0478-5746-a36d-77466e232c98
+	fromColumn: fato_movimento_estoque.id_centro_distribuicao
+	toColumn: dim_centro_distribuicao.id_centro_distribuicao
+
+relationship c1e56ba9-a61e-5818-a41e-b382d08c0369
+	fromColumn: fato_movimento_estoque.id_tipo_movimento
+	toColumn: dim_tipo_movimento.id_tipo_movimento
+
+relationship c2c7c957-8361-50f1-add8-428b15ac7999
+	fromColumn: fato_movimento_estoque.id_data_movimento
+	toColumn: dim_data.id_data
+
+relationship 1f1b5d66-af89-5d02-b031-b02d06ecd38c
+	fromColumn: fato_recebimento.id_produto
+	toColumn: dim_produto.id_produto
+
+relationship 6f4fce78-c661-595a-b8dc-2ee69bf5b8be
+	fromColumn: fato_recebimento.id_centro_distribuicao
+	toColumn: dim_centro_distribuicao.id_centro_distribuicao
+
+relationship dd78be4e-d876-59a1-9a7f-d49ee14816c7
+	fromColumn: fato_recebimento.id_fornecedor
+	toColumn: dim_fornecedor.id_fornecedor
+
+relationship 2512cd3f-0d0b-56c3-9b79-1423770cfd9d
+	fromColumn: fato_recebimento.id_data_recebimento
+	toColumn: dim_data.id_data
+

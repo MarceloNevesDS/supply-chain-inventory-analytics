@@ -1,0 +1,4 @@
+id_centro_distribuicao,cd_centro_distribuicao,nm_centro_distribuicao,nm_cidade,sg_uf,nm_regiao
+1,CD_BSB,CD Brasília,Brasília,DF,Centro-Oeste
+2,CD_SPO,CD São Paulo,São Paulo,SP,Sudeste
+3,CD_CWB,CD Curitiba,Curitiba,PR,Sul

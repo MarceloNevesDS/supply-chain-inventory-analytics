@@ -1,0 +1,93 @@
+table fato_movimento_estoque
+	lineageTag: 6dbce210-3ce6-40b1-8a14-05cc9f89406e
+
+	column id_movimento_estoque
+		dataType: int64
+		isHidden
+		lineageTag: 0b8e486e-1bb1-47b7-a575-b9f982f5ecb9
+		summarizeBy: none
+		sourceColumn: id_movimento_estoque
+
+	column id_produto
+		dataType: int64
+		isHidden
+		lineageTag: 03029d44-6018-4dfe-99b5-fc4c25b4fe6b
+		summarizeBy: none
+		sourceColumn: id_produto
+
+	column id_centro_distribuicao
+		dataType: int64
+		isHidden
+		lineageTag: 3d66b14d-6bec-4d12-9a7a-190262880850
+		summarizeBy: none
+		sourceColumn: id_centro_distribuicao
+
+	column id_tipo_movimento
+		dataType: int64
+		isHidden
+		lineageTag: 8bfb9e5d-2636-44de-90c5-296b523db282
+		summarizeBy: none
+		sourceColumn: id_tipo_movimento
+
+	column id_data_movimento
+		dataType: int64
+		isHidden
+		lineageTag: 2a5c49fe-2ec3-424d-b102-e17806df5aca
+		summarizeBy: none
+		sourceColumn: id_data_movimento
+
+	column id_recebimento
+		dataType: int64
+		isHidden
+		lineageTag: 684f8cf7-1216-4b3e-972e-1096574215c9
+		summarizeBy: none
+		sourceColumn: id_recebimento
+
+	column dt_movimento
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 272f911b-1da9-4f9d-9ee4-1bf8fce3fdf0
+		summarizeBy: none
+		sourceColumn: dt_movimento
+
+	column qt_movimento
+		dataType: int64
+		lineageTag: 712ee15b-ffc4-4e93-81d3-50fab81a77c4
+		summarizeBy: none
+		sourceColumn: qt_movimento
+
+	column qt_movimento_assinada
+		dataType: int64
+		lineageTag: 2e03de63-d117-4a92-91ae-d240c57dc776
+		summarizeBy: none
+		sourceColumn: qt_movimento_assinada
+
+	column vl_custo_unitario_movimento
+		dataType: double
+		lineageTag: 6c03a7ee-a90e-42ef-868e-c9986846ee21
+		summarizeBy: none
+		sourceColumn: vl_custo_unitario_movimento
+
+	column vl_movimento_assinado
+		dataType: double
+		lineageTag: f1c277fe-6f29-4cc7-bf33-ee31548b046b
+		summarizeBy: none
+		sourceColumn: vl_movimento_assinado
+
+	column tx_motivo_ajuste
+		dataType: string
+		lineageTag: 8c1aa44d-65c4-4ddd-9c8b-dee592378b37
+		summarizeBy: none
+		sourceColumn: tx_motivo_ajuste
+
+	partition fato_movimento_estoque = m
+		mode: import
+		source =
+				let
+				  Fonte = Csv.Document(File.Contents(pPastaDados & "/fato_movimento_estoque.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				  Cabecalhos = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				  Nulos = Table.ReplaceValue(Cabecalhos, "", null, Replacer.ReplaceValue, Table.ColumnNames(Cabecalhos)),
+				  Tipos = Table.TransformColumnTypes(Nulos, {{"id_movimento_estoque", Int64.Type}, {"id_produto", Int64.Type}, {"id_centro_distribuicao", Int64.Type}, {"id_tipo_movimento", Int64.Type}, {"id_data_movimento", Int64.Type}, {"id_recebimento", Int64.Type}, {"dt_movimento", type datetime}, {"qt_movimento", Int64.Type}, {"qt_movimento_assinada", Int64.Type}, {"vl_custo_unitario_movimento", type number}, {"vl_movimento_assinado", type number}, {"tx_motivo_ajuste", type text}}, "en-US")
+				in
+				  Tipos
+

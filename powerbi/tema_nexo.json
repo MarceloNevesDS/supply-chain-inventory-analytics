@@ -1,0 +1,13 @@
+{
+  "name": "Nexo Supply Chain",
+  "dataColors": [
+    "#147D92",
+    "#E09B36",
+    "#435A78",
+    "#D65D5D",
+    "#65A88D"
+  ],
+  "background": "#F4F7FA",
+  "foreground": "#18344A",
+  "tableAccent": "#147D92"
+}

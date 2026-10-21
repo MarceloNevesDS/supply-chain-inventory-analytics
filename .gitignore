@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editor e configurações locais
+.vscode/
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Power BI: cache local e arquivos PBIX
+powerbi/**/.pbi/
+powerbi/**/*.pbix
+
+# Arquivos temporários do SQLite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+
+# Temporários do projeto
+resultados/matplotlib_cache/
+dados/tmp*/
+
+# Windows
+Thumbs.db
+Desktop.ini

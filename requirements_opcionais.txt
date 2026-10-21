@@ -1,0 +1,4 @@
+# O pipeline principal usa somente a biblioteca padrão.
+# Somente para a figura e revalidação dos esquemas:
+matplotlib
+jsonschema

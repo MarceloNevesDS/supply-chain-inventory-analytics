@@ -1,0 +1,125 @@
+// Estoque
+Data de referência =
+VAR Primeira = MIN(dim_data[dt_data])
+VAR Selecionada = MAX(dim_data[dt_data])
+VAR Carga = CALCULATE(MAX(fato_estoque_diario[dt_estoque]), REMOVEFILTERS())
+RETURN IF(Primeira > Carga, BLANK(), MIN(Selecionada, Carga))
+
+// Estoque
+Valor do estoque =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[vl_estoque_final]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Saldo em unidades =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_saldo_final]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Compra pendente em unidades =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_compra_pendente]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Combinações em risco =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_risco_espera]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Combinações sem saída =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_sem_saida]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Combinações com cobertura elevada =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_cobertura_elevada]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Combinações sem saldo =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_indisponivel]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Combinações para repor =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[in_reposicao]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Demanda média diária =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_demanda_media_dia]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Ponto de reposição =
+VAR Ref = [Data de referência]
+RETURN IF(ISBLANK(Ref), BLANK(), CALCULATE(SUM(fato_estoque_diario[qt_ponto_reposicao]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Estoque
+Cobertura em dias =
+IF(HASONEVALUE(dim_produto[id_produto]) && HASONEVALUE(dim_centro_distribuicao[id_centro_distribuicao]), DIVIDE([Saldo em unidades], [Demanda média diária]))
+
+// Estoque
+Situação do estoque =
+VAR Ref = [Data de referência]
+RETURN IF(HASONEVALUE(dim_produto[id_produto]) && HASONEVALUE(dim_centro_distribuicao[id_centro_distribuicao]), CALCULATE(SELECTEDVALUE(fato_estoque_diario[tx_situacao_estoque]), REMOVEFILTERS(dim_data), dim_data[dt_data] = Ref))
+
+// Operação
+Unidades expedidas =
+CALCULATE(SUM(fato_movimento_estoque[qt_movimento]), dim_tipo_movimento[cd_tipo_movimento] = "EXPEDICAO")
+
+// Operação
+Custo das expedições =
+-CALCULATE(SUM(fato_movimento_estoque[vl_movimento_assinado]), dim_tipo_movimento[cd_tipo_movimento] = "EXPEDICAO")
+
+// Compras
+Valor comprado =
+SUM(fato_item_compra[vl_total_item])
+
+// Compras
+Pedidos emitidos =
+DISTINCTCOUNT(fato_item_compra[nr_pedido])
+
+// Compras
+Valor recebido =
+SUM(fato_recebimento[vl_total_recebido])
+
+// Compras
+Unidades recebidas =
+SUM(fato_recebimento[qt_recebida])
+
+// Fornecedores • posição final
+Itens vencidos no corte final =
+SUM(fato_item_compra[in_vencido_ate_referencia])
+
+// Fornecedores • posição final
+Itens integrais no prazo =
+SUM(fato_item_compra[in_integral_no_prazo])
+
+// Fornecedores • posição final
+Pontualidade no corte final =
+DIVIDE([Itens integrais no prazo], [Itens vencidos no corte final])
+
+// Fornecedores • posição final
+Itens pendentes atrasados =
+SUM(fato_item_compra[in_pendente_atrasado])
+
+// Fornecedores • posição final
+Prazo médio realizado =
+AVERAGE(fato_item_compra[nr_dias_entrega_completa])
+
+// Operação
+Unidades ajustadas =
+CALCULATE(SUM(fato_movimento_estoque[qt_movimento]), dim_tipo_movimento[cd_tipo_movimento] IN {"AJUSTE_POSITIVO", "AJUSTE_NEGATIVO"})
+
+// Operação
+Valor líquido dos ajustes =
+CALCULATE(SUM(fato_movimento_estoque[vl_movimento_assinado]), dim_tipo_movimento[cd_tipo_movimento] IN {"AJUSTE_POSITIVO", "AJUSTE_NEGATIVO"})
+
+// Operação
+Quantidade movimentada =
+SUM(fato_movimento_estoque[qt_movimento])
+
+// Operação
+Valor líquido movimentado =
+SUM(fato_movimento_estoque[vl_movimento_assinado])
