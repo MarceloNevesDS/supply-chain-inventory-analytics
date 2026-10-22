@@ -1,16 +1,17 @@
 # Dicionário e modelo de dados
 
 Termos natureza:
-     id --> identificador; 
-     cd --> código; 
-     dt --> data/instante; 
-     nm --> nome; 
-     vl --> valor; 
-     nr --> número; 
-     sg --> sigla; 
-     tx --> descrição; 
-     qt --> quantidade; 
-     in --> indicador.
+
+     id → identificador; 
+     cd → código; 
+     dt → data/instante; 
+     nm → nome; 
+     vl → valor; 
+     nr → número; 
+     sg → sigla; 
+     tx → descrição; 
+     qt → quantidade; 
+     in → indicador.
 
 ## dim_data
 Granularidade: Um dia.

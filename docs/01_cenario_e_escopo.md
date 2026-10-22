@@ -6,7 +6,7 @@ nacionais, recebe entregas parciais, expede mercadorias e ajusta inventários.
 Problemas: falta de produtos, mercadoria parada, atraso de fornecedores e capital
 em estoque. Objetivo: apoiar reposição, identificar riscos e acompanhar compras.
 
-Fluxo de trabalho: cenário → regras → modelo → Python → carga e validação → SQL →
+Fluxo de trabalho: Cenário → Regras → Modelo → Python → Carga e Validação → SQL →
 Power BI → documentação.
 
 Período operacional: 01/01/2024–31/12/2025, 731 dias. Calendário ampliado até
