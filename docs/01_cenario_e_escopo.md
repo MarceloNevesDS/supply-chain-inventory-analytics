@@ -7,7 +7,7 @@ Problemas: falta de produtos, mercadoria parada, atraso de fornecedores e capita
 em estoque. Objetivo: apoiar reposição, identificar riscos e acompanhar compras.
 
 Fluxo de trabalho: Cenário → Regras → Modelo → Python → Carga e Validação → SQL →
-Power BI → documentação.
+Power BI → Dcumentação.
 
 Período operacional: 01/01/2024–31/12/2025, 731 dias. Calendário ampliado até
 01/03/2026 para previsões. 100 produtos, três centros de distribuição, 12 fornecedores 
