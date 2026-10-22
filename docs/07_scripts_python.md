@@ -166,7 +166,7 @@ python preparar_analytics.py
 - Gera quatro páginas com cartões, gráficos, tabelas e filtros.
 - Produz o tema visual e arquivos auxiliares de consultas e medidas.
 
-**Entradas:** arquivos em powerbi/dados/.
+**Entradas:** arquivos em `powerbi/dados/`.
 
 **Principais saídas:**
 
@@ -183,7 +183,7 @@ A geração dos arquivos não executa Power Query nem medidas DAX.
 
 ## 7. configurar_powerbi.py
 
-**Finalidade:** ajustar o parâmetro pPastaDados ao local da pasta de CSVs.
+**Finalidade:** ajustar o parâmetro `pPastaDados` ao local da pasta de CSVs.
 
 **Funcionamento:** abre o `model.bim`, localiza a expressão do parâmetro e grava o caminho absoluto de `powerbi/dados/`.
 
@@ -224,7 +224,7 @@ A geração dos arquivos não executa Power Query nem medidas DAX.
 
 **Saída:** `docs/03_dicionario_de_dados.md`.
 
-**Cuidados:** sobrescreve o documento, incluindo eventuais edições manuais. A leitura dos relacionamentos depende de model.bim; é necessária adaptação para a versão em TMDL. O código já produz tabelas no formato Markdown.
+**Cuidados:** sobrescreve o documento, incluindo eventuais edições manuais. A leitura dos relacionamentos depende de `model.bim`; é necessária adaptação para a versão em TMDL. O código já produz tabelas no formato Markdown.
 
 ## 10. gerar_resumo_visual.py
 
@@ -288,4 +288,4 @@ O pipeline não chama automaticamente os scripts de dicionário, resumo visual, 
 A versão final do Power BI foi salva em TMDL. Os scripts `configurar_powerbi.py`, `validar_powerbi_schema.py` e `gerar_dicionario.py` ainda leem `model.bim`; `construir_powerbi.py` gera esse formato inicial.
 
 Antes de executar esses utilitários sobre a entrega final, é necessário adaptar a leitura do modelo e proteger os ajustes realizados no Desktop.
-Vários utilitários executam suas atividades diretamente ao serem importados. Para reutilização como módulos Python, recomenda-se organizar sua execução em uma função `main()` protegida por `if __name__ == "__main__"`:.
+Vários utilitários executam suas atividades diretamente ao serem importados. Para reutilização como módulos Python, recomenda-se organizar sua execução em uma função `main()` protegida por `if __name__ == "__main__":`.
