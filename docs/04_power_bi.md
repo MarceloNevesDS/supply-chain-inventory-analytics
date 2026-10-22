@@ -5,7 +5,7 @@ passos abaixo:
 
 ## Abrir (iniciar o projeto)
 1. Extraia os objetos na raiz do projeto (Supply Chain & Inventory Analytics).
-2. Execute `python configurar_powerbi.py`.
+2. Configure o parâmetro `pPastaDados` conforme as instruções da seção Modelo semântico.
 3. Abra `powerbi/SupplyChain.pbip` no Power BI Desktop.
 4. Se a versão solicitar habilitação de projetos PBIP/PBIR, siga as opções
    indicadas pelo próprio Desktop e reinicie o aplicativo quando necessário.
@@ -26,20 +26,30 @@ inativa. Os IDs ficam ocultos. A dimensão calendário tem dia, mês, bimestre,
 trimestre, semestre e nomes. Os textos de calendário são ordenados pelos atributos 
 numéricos.
 
-O modelo semântico está no formato TMSL em `SupplyChain.SemanticModel/model.bim`.
-O parâmetro pPastaDados controla a pasta CSV; configurar_powerbi.py o ajusta.
-O gerador construir_powerbi.py recria o projeto e restaura o caminho padrão;
-execute configurar_powerbi.py depois dele.
+O modelo semântico da versão final está no formato TMDL, na pasta
+`powerbi/SupplyChain.SemanticModel/definition/`.
+
+Para configurar a origem dos dados em outra máquina:
+
+1. Abra `powerbi/SupplyChain.pbip` no Power BI Desktop.
+2. No Power Query, localize o parâmetro `pPastaDados` em Gerenciar parâmetros.
+3. Informe o caminho absoluto da pasta `powerbi/dados` da sua cópia do projeto.
+4. Aplique as alterações e atualize os dados.
+
+O script `configurar_powerbi.py` foi desenvolvido para a estrutura inicial
+em `model.bim` e precisa ser adaptado antes de configurar a versão em TMDL.
+
+O script `construir_powerbi.py` recria o projeto. Sua execução pode sobrescrever
+os ajustes de modelo e apresentação feitos posteriormente no Power BI Desktop.
 
 ## Páginas de relatório
-+------------------------------------------------------------------------------------+
+
 | Página                    | Leitura                                                |
-|---------------------------+--------------------------------------------------------|
+| --- | --- |
 | 01 • Visão executiva      | Estoque no fechamento, risco, fluxos e tendência       |
 | 02 • Estoque e reposição  | Posição de produto/centro, pendências e cobertura      |
 | 03 • Fornecedores         | Posição final em 31/12/2025, pontualidade por item     |
 | 04 • Compras e movimentos | Compras por emissão, recebimentos por chegada, ajustes |
-+------------------------------------------------------------------------------------+
 
 Há quatro páginas e 37 visuais definidos, incluindo segmentadores.  O tema utilizado 
 está em tema_nexo.json e pode ser importado em Design → Importar tema.
@@ -58,9 +68,9 @@ automaticamente o status final em status histórico. Para isso use a consulta SQ
 histórica ou construa um indicador DAX específico.
 
 ## Conferência sem filtros aplicados
-+-------------------------------------------------+
+
 | Indicador                     | Esperado        |
-|-------------------------------+-----------------| 
+| --- | --- |
 | Valor do estoque              | R$ 2.951.164,50 |
 | Saldo em unidades             | 34.875          |
 | Compra pendente               | 25.637          |
@@ -74,7 +84,6 @@ histórica ou construa um indicador DAX específico.
 | Itens pendentes atrasados     | 26              |
 | Pedidos emitidos              | 4.421           |
 | Unidades expedidas            | 1.238.829       |
-+-------------------------------------------------+
 
 ## Critérios para concluir a homologação na sua máquina local
 - Atualização das nove tabelas sem erro de Power Query.

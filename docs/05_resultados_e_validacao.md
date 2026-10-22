@@ -18,9 +18,9 @@ com vigência.
   compras no próprio dia; não significa ausência de risco físico.
 
 ## Verificações executadas
-+-----------------------------------------------------------------------------------------------------+
+
 | Verificação                                            | Resultado                                  |
-|--------------------------------------------------------|--------------------------------------------|
+| --- | --- |
 | DDL, PK, FK, UNIQUE, NOT NULL e CHECK                  | Casos de rejeição aprovados                |
 | Regressão de custo e corrupção deliberada              | Oito casos aprovados                       |
 | Auditoria cronológica                                  | Sem divergências de saldo, custo ou valor  |
@@ -31,7 +31,6 @@ com vigência.
 | Definições PBIR/PBIP/PBISM                             | 47 arquivos validados por JSON Schema      |
 | Modelo semântico                                       | 16 relações com colunas existentes         |
 | Atualização/renderização no Desktop                    | Finalizada com sucesso                     |
-+-----------------------------------------------------------------------------------------------------+
 
 Evidências: JSON na pasta resultados, relatório junto ao banco e arquivos
 testes_ddl.json/testes_operacao.json na raiz. O PNG resumo_executivo é uma

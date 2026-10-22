@@ -17,17 +17,15 @@ sem filtros de centro ou categoria.
 
 Estoque no fechamento
 
-+------------------------------------------------------------------+
 | Indicador                                      | Resultado       |
-+------------------------------------------------+-----------------+
-| Valor do estoque                               | R$ 2.951.164,50 | 
-| Saldo físico                                   | 34.875 unidades | 
-| Compras pendentes	                             | 25.637 unidades | 
-| Combinações de produto e centro em risco	     | 90              |  
-| Combinações sem saldo e com demanda observada  | 8               |  
-| Combinações com estoque e sem saída em 90 dias | 6               |   
-| Combinações a repor	                         | 1               | 
-+------------------------------------------------------------------+
+| --- | --- |
+| Valor do estoque                               | R$ 2.951.164,50 |
+| Saldo físico                                   | 34.875 unidades |
+| Compras pendentes	                             | 25.637 unidades |
+| Combinações de produto e centro em risco	     | 90              |
+| Combinações sem saldo e com demanda observada  | 8               |
+| Combinações com estoque e sem saída em 90 dias | 6               |
+| Combinações a repor	                         | 1               |
 
 Os indicadores evidenciam situações que exigem ações distintas.
 As 90 combinações em risco possuem saldo físico inferior à demanda média observada 
@@ -44,15 +42,13 @@ imediata.
 
 Compras e recebimentos no período
 
-+--------------------------------------------+
 | Indicador	          | Resultado            |
-+---------------------+----------------------+
+| --- | --- |
 | Pedidos emitidos	  | 4.421                |
 | Itens de compra	  | 6.821                |
 | Valor comprado	  | R$ 105.248.309,80    |
 | Valor recebido	  | R$ 103.237.368,91    |
 | Unidades expedidas  | 1.238.829            |
-+--------------------------------------------+
 
 
 Compras e recebimentos representam eventos diferentes. A diferença entre seus 
@@ -61,15 +57,13 @@ ainda pode estar dentro do prazo previsto no fechamento.
 
 Desempenho dos fornecedores
 
-+----------------------------------------------------------+
 | Indicador	                                   | Resultado |
-+----------------------------------------------+-----------|
+| --- | --- |
 | Itens com prazo previsto até o fechamento    | 6.720     |
 | Itens integralmente recebidos no prazo       | 1.832     |
 | Pontualidade                                 | 27,26     |
 | Itens pendentes atrasados                    | 26        |
 | Prazo médio de entrega dos itens concluídos  | 13,14     |
-+----------------------------------------------------------+
 
 A pontualidade foi calculada por:
 Itens integralmente recebidos no prazo ÷ itens com prazo previsto até o fechamento.
@@ -82,15 +76,13 @@ também reduzem a pontualidade.
 
 Na exploração do Power BI, o Fornecedor fictício 12 apresentou:
 
-+-------------------------------------------------------------+
 | Indicador	                                 | Resultado      |
-+--------------------------------------------+----------------+
+| --- | --- |
 | Itens com prazo previsto até o fechamento  | 599            |
 | Itens integralmente recebidos no prazo     | 64             |
 | Pontualidade                               | 10,68%         |
 | Itens pendentes atrasados                  | 4              |
 | Prazo médio dos itens concluídos           | 15,11 dia      |
-+-------------------------------------------------------------+
         
 A pontualidade do Fornecedor fictício 12 ficou 16,58 pontos percentuais abaixo do 
 resultado geral. O resultado justifica priorizar a investigação de seus prazos, 
@@ -104,15 +96,13 @@ deve ser analisado junto com o volume e os motivos dos ajustes.
 
 ## 3. Recomendações de negócio
 
-+----------------------------------------------------------------------------------------------------------------------+
 | Situação identificada	                   | Ação proposta                                                             |
-+------------------------------------------+---------------------------------------------------------------------------+
+| --- | --- |
 | Saldo zero com demanda observada         | Conferir recebimentos previstos e avaliar antecipações ou transferências  |
 | Cobertura inferior ao prazo de reposição | Acompanhar compras pendentes antes de ocorrer falta                       |
 | Baixa pontualidade de fornecedores       | Comparar prazos prometidos e realizados por item e acompanhar recorrência |
 | Estoque sem saída por 90 dias            | Investigar demanda, cadastro e alternativas de destinação                 |
 | Ajustes positivos e negativos            | Analisar motivos e recorrência por produto e centro                       |
-+----------------------------------------------------------------------------------------------------------------------+
 
 Essas ações são propostas analíticas. 
 O projeto não mede resultados posteriores à sua implementação.
